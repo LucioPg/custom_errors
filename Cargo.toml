@@ -1,0 +1,13 @@
+[package]
+name = "custom_errors"
+version = "0.1.0"
+edition = "2024"
+description = "Typed error types for password management applications"
+license = "MIT"
+repository = "https://github.com/LucioPg/custom_errors"
+readme = "README.md"
+keywords = ["error", "thiserror", "password", "authentication"]
+categories = ["rust-patterns", "authentication"]
+
+[dependencies]
+thiserror = "2.0"
