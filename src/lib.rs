@@ -40,6 +40,12 @@ pub enum DBError {
     DBSettingsError(String),
     #[error("Database registration error: {0}")]
     DBRegistrationError(String),
+    #[error("Database key missing: recovery key required")]
+    DBKeyMissingWithDb,
+    #[error("Invalid recovery key")]
+    DBRecoveryKeyInvalid,
+    #[error("Salt file error: {0}")]
+    DBSaltFileError(String),
 }
 
 impl DBError {
@@ -112,6 +118,18 @@ impl DBError {
 
     pub fn new_registration_error(msg: String) -> Self {
         DBError::DBRegistrationError(msg)
+    }
+
+    pub fn new_key_missing_with_db() -> Self {
+        DBError::DBKeyMissingWithDb
+    }
+
+    pub fn new_recovery_key_invalid() -> Self {
+        DBError::DBRecoveryKeyInvalid
+    }
+
+    pub fn new_salt_file_error(msg: String) -> Self {
+        DBError::DBSaltFileError(msg)
     }
 }
 
