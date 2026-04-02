@@ -205,3 +205,25 @@ impl GeneralError {
         GeneralError::ScalingError(msg)
     }
 }
+
+#[derive(Error, Debug)]
+pub enum SingletonError {
+    #[error("Failed to create singleton mutex for {app_name}")]
+    MutexCreationFailed { app_name: String },
+    #[error("Another instance of {app_name} is already running")]
+    AlreadyRunning { app_name: String },
+}
+
+impl SingletonError {
+    pub fn new_mutex_creation_failed(app_name: impl Into<String>) -> Self {
+        SingletonError::MutexCreationFailed {
+            app_name: app_name.into(),
+        }
+    }
+
+    pub fn new_already_running(app_name: impl Into<String>) -> Self {
+        SingletonError::AlreadyRunning {
+            app_name: app_name.into(),
+        }
+    }
+}
