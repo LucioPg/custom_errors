@@ -46,6 +46,8 @@ pub enum DBError {
     DBRecoveryKeyInvalid,
     #[error("Salt file error: {0}")]
     DBSaltFileError(String),
+    #[error("Password hash corruption: {0}")]
+    DBPasswordHashCorruptionError(String),
 }
 
 impl DBError {
@@ -130,6 +132,10 @@ impl DBError {
 
     pub fn new_salt_file_error(msg: String) -> Self {
         DBError::DBSaltFileError(msg)
+    }
+
+    pub fn new_password_hash_corruption_error(msg: String) -> Self {
+        DBError::DBPasswordHashCorruptionError(msg)
     }
 }
 
